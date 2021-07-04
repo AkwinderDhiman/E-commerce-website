@@ -1,0 +1,126 @@
+<div [ngClass]="setClass" *ngIf="layout=='grid'">
+    <figure class="product-media">
+        <span *ngIf="data.label || getStockStatus(data.stockStatus)"
+        [class]="getLabelColor(data.label,data)"
+        >{{data.label}} </span>
+        <a 
+        (click)="onAddToProductDetail(data)" 
+        (click)="goToProductDetailComponent()">
+            <img [src]="imagesrc" alt="Product image" class="product-image" >
+            <img *ngIf="data.imageSrc.length>1" [src]='data.imageSrc[1]' alt="Product image" class="product-image-hover" >
+        </a>
+
+        <div class="product-action-vertical">
+            <a  class="btn-product-icon btn-wishlist btn-expandable" (click)="onAddItemToWishList(data)"><span>add to wishlist</span></a>
+            <a  class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+            <a  class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+        </div><!-- End .product-action -->
+
+        <div class="product-action" *ngIf="data.stockStatus !== 'out of stock'">
+            <a  class="btn-product btn-cart" (click)="onAddtoCart(data)" ><span>add to cart</span></a>
+        </div><!-- End .product-action -->
+    </figure><!-- End .product-media -->
+
+    <div class="product-body">
+        <div class="product-cat">
+           
+            <a >{{data.category }}</a>
+        </div><!-- End .product-cat -->
+        <h3 class="product-title"><a href="product.html">{{ data.subCategory }}</a></h3><!-- End .product-title -->
+        <div class="product-price" >
+           <span *ngIf="!getLabel(data.label) ">{{ data.price | currency}}</span>
+           <span *ngIf="getLabel(data.label)" class="new-price">Now {{ data.price | currency}}</span>
+           <span *ngIf="getLabel(data.label)" class="old-price">Was {{ data.oldPrice | currency}}</span>
+        </div><!-- End .product-price -->
+       
+        <div class="product-nav product-nav-dots" *ngIf="data.color && showColor" >
+            <a *ngFor="let color of data.color;let index=index" class="" [style]='getColor(data,index)'>
+                <span class="sr-only">Color name:   </span>
+               
+            </a>
+          
+        </div><!-- End .product-nav -->
+        <div class="ratings-container" style="margin-bottom: 1rem;" [ngStyle]="{'visibility': visibilityOfRatings}">
+            <div class="ratings" >
+                <div class="ratings-val" 
+                [style]="getAverageRating(data.reviews_rating)">
+                </div><!-- End .ratings-val -->
+            </div><!-- End .ratings -->
+            <a class="ratings-text">( {{data.reviews_rating.length}} Reviews )</a>
+        </div>
+        <div class="product-nav product-nav-thumbs" *ngIf='changeImgSrc'>
+            <a  class="active" *ngFor="let imgSrc of data.colorChoiceImgSrc" >
+                <img  [src]="imgSrc" alt="product desc" (click)="onChangeImgColor(imgSrc)">
+            </a>
+        </div>
+    </div><!-- End .product-body -->
+</div>
+
+
+
+
+
+<!---single row list layout-->
+
+   
+        <div class="row" *ngIf="layout=='list'">
+            <div class="col-6 col-lg-3">
+                <figure class="product-media">
+                    <span *ngIf="data.label || getStockStatus(data.stockStatus)"
+                    [class]="getLabelColor(data.label,data)"
+                    >{{data.label}} </span>
+                    <a (click)="onAddToProductDetail(data)" (click)="goToProductDetailComponent()">
+                        <img [src]="imagesrc" alt="Product image" class="product-image" >
+                        <img *ngIf="data.imageSrc.length>1" [src]='data.imageSrc[1]' alt="Product image" class="product-image-hover" >
+                    </a>
+                </figure><!-- End .product-media -->
+            </div><!-- End .col-sm-6 col-lg-3 -->
+
+            <div class="col-6 col-lg-3 order-lg-last">
+                <div class="product-list-action">
+                    <div class="product-price" >
+                        <span *ngIf="!getLabel(data.label) ">{{ data.price | currency}}</span>
+                        <span *ngIf="getLabel(data.label)" class="new-price">Now {{ data.price | currency}}</span>
+                        <span *ngIf="getLabel(data.label)" class="old-price">Was {{ data.oldPrice | currency}}</span>
+                     </div><!-- End .product-price -->
+                     <div class="ratings-container" style="margin-bottom: 1rem;" [ngStyle]="{'visibility': visibilityOfRatings}">
+                        <div class="ratings" >
+                            <div class="ratings-val" 
+                            [style]="getAverageRating(data.reviews_rating)">
+                            </div><!-- End .ratings-val -->
+                        </div><!-- End .ratings -->
+                        <span class="ratings-text">( {{data.reviews_rating.length}} Reviews )</span>
+                    </div><!-- End .rating-container -->
+
+                    <div class="product-action">
+                        <a  class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
+                        <a  class="btn-product btn-compare" title="Compare"><span>compare</span></a>
+                    </div><!-- End .product-action -->
+
+                    <a (click)="onAddtoCart(data)" class="btn-product btn-cart"><span>add to cart</span></a>
+                </div><!-- End .product-list-action -->
+            </div><!-- End .col-sm-6 col-lg-3 -->
+
+            <div class="col-lg-6">
+                <div class="product-body product-action-inner">
+                    <a (click)="onAddItemToWishList(data)"class="btn-product btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    <div class="product-cat">
+                        <a href="#">{{data.category}}</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="product.html">{{ data.subCategory }}</a></h3><!-- End .product-title -->
+
+                    <div class="product-content">
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque </p>
+                    </div><!-- End .product-content -->
+                    
+                    <div class="product-nav product-nav-thumbs">
+                        <a  class="active" *ngFor="let imgSrc of data.colorChoiceImgSrc" >
+                            <img  [src]="imgSrc" alt="product desc" (click)="onChangeImgColor(imgSrc)">
+                        </a>
+                    </div><!-- End .product-nav -->
+                </div><!-- End .product-body -->
+            </div><!-- End .col-lg-6 -->
+        </div><!-- End .row -->
+    <!-- End .product -->
+
+ 

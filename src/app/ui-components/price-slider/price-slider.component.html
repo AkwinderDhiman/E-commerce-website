@@ -1,0 +1,13 @@
+<div class="filter-price">
+    <div class="filter-price-text">
+        Price Range:
+        <span id="filter-price-range">${{ minValue }} - ${{ maxValue }}</span>
+    </div>
+    <div id="price-slider" class="noUi-target noUi-ltr noUi-horizontal">
+        <div class="noUi-base">
+            <div class="custom-slider">
+                <ngx-slider [options]="options" [(value)]="minValue"  [(highValue)]="maxValue"></ngx-slider>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+.product-nav-thumbs a.active, .product-nav-thumbs a:hover, .product-nav-thumbs a:focus, .product-nav-thumbs span.active, .product-nav-thumbs span:hover, .product-nav-thumbs span:focus {
+    box-shadow: 0 0 0 0rem #cccccc;
+}
+
+a{
+    cursor: pointer;
+    z-index: 10000;
+}

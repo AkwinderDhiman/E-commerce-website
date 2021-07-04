@@ -1,0 +1,19 @@
+<div [className]="toggleMobileMenu?'page-transform page-wrapper':'page-wrapper'">
+    <app-header (mobileMenuClose)="mobileMenuToggle()" #sectionNeedToScroll></app-header>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+    <app-log-in></app-log-in>
+    <button  
+    (click)="topFunction()" 
+    id="scroll-top" 
+    title="Back to Top" 
+    [ngClass]="scroll? 'show' : ''" #scrolltop><i class="icon-arrow-up"></i></button>
+</div>
+
+
+<div>
+    <!-- <app-pagination></app-pagination> -->
+    <!-- <app-product-list-row></app-product-list-row> -->
+    <!-- <app-price-slider></app-price-slider> -->
+    <!-- <app-new-arrivals></app-new-arrivals> -->
+</div>

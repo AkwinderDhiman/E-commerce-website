@@ -1,0 +1,26 @@
+
+.footer-menu a:hover,
+.footer-menu a:focus {
+    box-shadow: 0 1px 0;
+        color:#c96 ;
+}
+
+.footer {
+    margin-top: 5rem;
+    padding-top: 6rem;
+    border-top: .1rem solid lightgray;
+    width: 100%;
+    font-weight: 300;
+    font-size: 1.4rem;
+    color: #777;
+    background-color: #fff;
+}
+.footer a{
+    color: #777;
+}
+.footer a:hover{
+    color: #c96;
+}
+p{
+    margin-top: 1.9rem;
+}

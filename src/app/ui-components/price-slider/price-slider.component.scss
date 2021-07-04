@@ -1,0 +1,69 @@
+// We need to use ::ng-deep to overcome view encapsulation
+::ng-deep {
+    .custom-slider .ngx-slider .ngx-slider-limit .ngx-slider-floor{
+        opacity: 0;
+        visibility: hidden;
+        left: 0px;
+    }
+    .custom-slider .ngx-slider .ngx-slider-bar {
+        background: #ebebeb;
+        border-radius: 6px;
+        height: 3px;
+    }
+    .custom-slider .ngx-slider .ngx-slider-selection {
+        background: #333;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-pointer {
+    //   width: 12px;
+    //   height: 16px;
+    //   top: auto; /* to remove the default positioning */
+    //   bottom: 0;
+    //   background-color: green;
+    outline: none;
+    border: .1rem solid #555555;
+    top: auto;
+    width: 13.5px;
+    height: 13.5px;
+    top: -0.1;
+    bottom: -0.4rem;
+    border-radius: 50%;
+    background-color: #fff;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-pointer:after {
+      display: none;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-bubble {
+        top: 1rem;
+        font-weight: 300;
+    font-size: 1.4rem;
+    //   bottom: 15px;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-limit {
+      font-weight: bold;
+      color: orange;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-tick {
+      
+      width: 1px;
+      height: 16px;
+      margin-left: 5px;
+      border-radius: 0;
+      background: black;
+      top: -1px;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+      background: rgb(0, 120, 155);
+    }
+    
+  }
+  .filter-price-text {
+    margin-bottom: -1.9rem;
+    // margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+}

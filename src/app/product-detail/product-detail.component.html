@@ -1,0 +1,278 @@
+<main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+        <div class="container d-flex align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Products</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Default</li>
+            </ol>
+
+            <nav class="product-pager ml-auto" aria-label="Product">
+                <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
+                    <i class="icon-angle-left"></i>
+                    <span>Prev</span>
+                </a>
+
+                <a class="product-pager-link product-pager-next" href="#" aria-label="Next" tabindex="-1">
+                    <span>Next</span>
+                    <i class="icon-angle-right"></i>
+                </a>
+            </nav><!-- End .pager-nav -->
+        </div><!-- End .container -->
+    </nav>
+    <div class="page-content">
+        <div class="container" *ngFor="let data of productdetail;let i=index">
+            <div class="product-details-top" *ngIf="show">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="product-gallery product-gallery-vertical">
+                            <div class="row">
+                                <figure class="product-main-image">
+                                    <img id="product-zoom" [src]='imagesrc'
+                                        data-zoom-image="assets/images/products/single/1-big.jpg" alt="product image">
+
+                                    <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                        <i class="icon-arrows"></i>
+                                    </a>
+                                </figure><!-- End .product-main-image -->
+
+                                <div id="product-zoom-gallery" class="product-image-gallery">
+                                    <a data-image="assets/images/products/single/1.jpg"
+                                        data-zoom-image="assets/images/products/single/1-big.jpg">
+                                        <a *ngFor="let image of data.imageSrc" (click)="onChangeImgColor(image)"
+                                            [ngClass]="image==imagesrc?'product-gallery-item active':'product-gallery-item'">
+                                            <img [src]='image' alt="product side">
+                                        </a>
+
+                                    </a>
+
+                                </div><!-- End .product-image-gallery -->
+                            </div><!-- End .row -->
+                        </div><!-- End .product-gallery -->
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                        <div class="product-details">
+                            <h1 class="product-title">{{data.subCategory}}</h1>
+                            <!-- End .product-title -->
+
+                            <div class="ratings-container">
+                                <div class="ratings">
+                                    <div class="ratings-val"
+                                        [style]="'width:'+(width/data.reviews_rating.length)*100/5+'%'">
+                                    </div>
+                                </div><!-- End .ratings -->
+                                <a class="ratings-text" id="review-link">
+                                    ({{data.reviews_rating.length }} Reviews )</a>
+                            </div><!-- End .rating-container -->
+
+                            <div class="product-price">
+                                {{ data.price*data.quantity | currency}}
+                            </div><!-- End .product-price -->
+
+                            <div class="product-content">
+                                <p> Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus
+                                    libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
+                            </div><!-- End .product-content -->
+
+
+                            <div class="details-filter-row details-row-size" *ngIf="data.color !=''">
+                                <label>Color:</label>
+
+                                <div class="product-nav product-nav-thumbs" *ngFor="let imagesrc of data.imageSrc">
+                                    <a class="active" (click)="onChangeImgColor(imagesrc)">
+                                        <img [src]='imagesrc' alt="product desc">
+                                    </a>
+
+                                </div><!-- End .product-nav -->
+                            </div><!-- End .details-filter-row -->
+
+                            <div class="details-filter-row details-row-size">
+                                <label for="size">Size:</label>
+                                <div class="select-custom">
+                                    <select name="size" id="size" class="form-control">
+                                        <option value="#" selected="selected">Select a size</option>
+                                        <option value="s">Small</option>
+                                        <option value="m">Medium</option>
+                                        <option value="l">Large</option>
+                                        <option value="xl">Extra Large</option>
+                                    </select>
+                                </div><!-- End .select-custom -->
+
+                                <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a>
+                            </div><!-- End .details-filter-row -->
+
+                            <div class="details-filter-row details-row-size">
+                                <label for="qty">Qty:</label>
+                                <div class="product-details-quantity">
+                                    <app-input-spinner [value]="data.quantity"
+                                        (change)="onInputSpinnerChange($event,data)"></app-input-spinner>
+                                </div><!-- End .product-details-quantity -->
+                            </div><!-- End .details-filter-row -->
+
+                            <div class="product-details-action">
+                                <a *ngIf="!getStockStatus(data.stockStatus)" (click)="onAddItemToCart(data)"
+                                    class="btn-product btn-cart"><span>add to cart</span></a>
+                                <span *ngIf="getStockStatus(data.stockStatus)" class="out-of-stock">Out of stock</span>
+                                <div class="details-action-wrapper">
+                                    <a (click)="onAddItemToWishlsit(data)" class="btn-product btn-wishlist"
+                                        title="Wishlist"><span>Add to
+                                            Wishlist</span></a>
+                                    <a class="btn-product btn-compare" title="Compare"><span>Add to
+                                            Compare</span></a>
+                                </div><!-- End .details-action-wrapper -->
+                            </div><!-- End .product-details-action -->
+
+                            <div class="product-details-footer">
+                                <div class="product-cat">
+                                    <span>Category:</span>
+                                    <a href="#">Women</a>,
+                                    <a href="#">Dresses</a>,
+                                    <a href="#">Yellow</a>
+                                </div><!-- End .product-cat -->
+
+                                <div class="social-icons social-icons-sm">
+                                    <span class="social-label">Share:</span>
+                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i
+                                            class="icon-facebook-f"></i></a>
+                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i
+                                            class="icon-twitter"></i></a>
+                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i
+                                            class="icon-instagram"></i></a>
+                                    <a href="#" class="social-icon" title="Pinterest" target="_blank"><i
+                                            class="icon-pinterest"></i></a>
+                                </div>
+                            </div><!-- End .product-details-footer -->
+                        </div><!-- End .product-details -->
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div>
+
+            <div class="product-details-tab">
+                <ul class="nav nav-pills justify-content-center" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab"
+                            aria-controls="product-desc-tab" aria-selected="false">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab"
+                            aria-controls="product-info-tab" aria-selected="false">Additional information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab"
+                            role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping &amp;
+                            Returns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="product-review-link" data-toggle="tab" href="#product-review-tab"
+                            role="tab" aria-controls="product-review-tab" aria-selected="true">Reviews
+                            ({{data.reviews_rating.length}})</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade" id="product-desc-tab" role="tabpanel"
+                        aria-labelledby="product-desc-link">
+                        <div class="product-desc-content">
+                            <h3>Product Information</h3>
+                            <p>{{data.description}}</p>
+                            <ul>
+                                <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
+                                <li>Vivamus finibus vel mauris ut vehicula.</li>
+                                <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.</li>
+                            </ul>
+
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat
+                                mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper
+                                suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam
+                                porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices
+                                nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique
+                                cursus. </p>
+                        </div><!-- End .product-desc-content -->
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-info-tab" role="tabpanel"
+                        aria-labelledby="product-info-link">
+                        <div class="product-desc-content">
+                            <h3>Information</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat
+                                mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper
+                                suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam
+                                porttitor mauris sit amet orci. </p>
+
+                            <h3>Fabric &amp; care</h3>
+                            <ul>
+                                <li>Faux suede fabric</li>
+                                <li>Gold tone metal hoop handles.</li>
+                                <li>RI branding</li>
+                                <li>Snake print trim interior </li>
+                                <li>Adjustable cross body strap</li>
+                                <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
+                            </ul>
+
+                            <h3>Size</h3>
+                            <p>one size</p>
+                        </div><!-- End .product-desc-content -->
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
+                        aria-labelledby="product-shipping-link">
+                        <div class="product-desc-content">
+                            <h3>Delivery &amp; returns</h3>
+                            <p>We deliver to over 100 countries around the world. For full details of the delivery
+                                options we offer, please view our <a href="#">Delivery information</a><br>
+                                We hope you’ll love every purchase, but if you ever need to return an item you can do so
+                                within a month of receipt. For full details of how to make a return, please view our <a
+                                    href="#">Returns information</a></p>
+                        </div><!-- End .product-desc-content -->
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade active show" id="product-review-tab" role="tabpanel"
+                        aria-labelledby="product-review-link">
+                        <div class="reviews">
+                            <h3>Reviews ({{data.reviews_rating.length}})</h3>
+                            <div class="review" *ngFor="let review of data.reviews_rating;let index = index">
+                                <div class="row no-gutters" *ngIf="data.reviews_rating.length !==0">
+                                    <div class="col-auto">
+                                        <h4><a>{{review.reviewersName}}</a></h4>
+                                        <div class="ratings-container">
+                                            <div class="ratings">
+                                                <div class="ratings-val"
+                                                    [style]="'width:'+(review.reviewRatingStar*100)/5+'%'"></div>
+                                                <!-- End .ratings-val -->
+                                            </div><!-- End .ratings -->
+                                        </div><!-- End .rating-container -->
+                                        <span class="review-date">{{ review.time | timeAgo }}</span>
+                                    </div><!-- End .col -->
+                                    <div class="col">
+                                        <h4>Good, perfect size</h4>
+
+                                        <div class="review-content">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum
+                                                dolores assumenda asperiores facilis porro reprehenderit animi culpa
+                                                atque blanditiis commodi perspiciatis doloremque, possimus, explicabo,
+                                                autem fugit beatae quae voluptas!</p>
+                                        </div><!-- End .review-content -->
+
+                                        <div class="review-action">
+                                            <a (click)="onLike(review)"><i class="icon-thumbs-up"></i>Helpful ({{
+                                                review.reviewlikes }})</a>
+                                            <a (click)="onDislike(review)"><i class="icon-thumbs-down"></i>Unhelpful ({{
+                                                review.reviewdislikes }})</a>
+                                        </div><!-- End .review-action -->
+                                    </div><!-- End .col-auto -->
+                                </div><!-- End .row -->
+                            </div><!-- End .review -->
+
+
+                        </div><!-- End .reviews -->
+                    </div><!-- .End .tab-pane -->
+                </div><!-- End .tab-content -->
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="zoomContainer"
+    style="transform: translateZ(0px); position: absolute; left: 10px; top: 171.172px; height: 457.188px; width: 457.188px;">
+    <div class="zoomWindowContainer" style="width: 400px;">
+        <div style="z-index: 999; overflow: hidden; margin-left: 0px; margin-top: 0px; background-position: -742.812px -190.913px; width: 457.188px; height: 457.188px; float: left; cursor: crosshair; background-repeat: no-repeat; position: absolute; background-image: url(&quot;assets/images/products/single/1-big.jpg&quot;); top: 0px; left: 0px; background-size: 1200px 1200px; display: none;"
+            class="zoomWindow">&nbsp;</div>
+    </div>
+</div>

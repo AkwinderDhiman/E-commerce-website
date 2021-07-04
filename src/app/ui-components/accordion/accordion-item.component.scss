@@ -1,0 +1,63 @@
+@import url("https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css");
+
+
+// .acc-header{
+//     display: flex;
+//     min-height: 30px;
+//     flex-direction: row;
+//     align-items: center;
+//     padding-right: 4.5rem;
+//     border-bottom: 1px solid #efefef;
+//     cursor: pointer;
+// }
+.acc-header:hover{
+    color: #c96
+}
+.headerTitle{
+    overflow-wrap: break-word;
+    width: 100%;
+    // margin-right: 125px
+}
+.headerTitle:hover{
+    color: #c96
+}
+
+.acc-body{
+    min-height: 30px;
+    display: flex;
+    line-height: 1.5rem;
+    align-items: center;
+}
+
+
+
+element.style {
+    transform: rotate(
+0deg
+);
+}
+.mobile-menu-light .mmenu-btn:not(:hover):not(:focus) {
+    color: #666;
+ }
+// .mmenu-btn {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     position: relative;
+//     right: -2.5rem;
+//     top: 1rem;
+//     z-index: 10;
+//     width: 3rem;
+//     height: 3rem;
+//     font-size: 1.2rem;
+//     color: #fff;
+//     margin-top: -1.5rem;
+//     border-radius: 0;
+//     background-color: transparent;
+//     cursor: pointer;
+//     outline: none;
+//     transition: color 0.35s;
+// }
+// .mmenu-btn:hover{
+//     color: #c96;
+// }

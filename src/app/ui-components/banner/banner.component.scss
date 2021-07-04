@@ -1,0 +1,27 @@
+.banner-display > a:before {
+    background-color: rgba(102, 102, 102, 0.25);
+}
+.banner-display .banner-title {
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: -0.025em;
+}
+.banner-display .banner-subtitle {
+    font-weight: 300;
+    font-size: 1.4rem;
+    letter-spacing: 0;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+.banner-display .btn.banner-link {
+    text-transform: none;
+    min-width: 126px;
+}
+.banner-title-hidden .banner-title {
+    visibility: hidden;
+    transition: all 0.3s;
+}
+.banner-title-hidden:hover .banner-title,
+.banner-title-hidden:focus .banner-title {
+    visibility: visible;
+}
